@@ -5,6 +5,13 @@
     <RootNamespace>Gihan.Helpers</RootNamespace>
     <Authors>Muhammad Babayi</Authors>
     <Company>GihanSoft</Company>
+    <Description>Compare for string to sort by number in string (as windows explorer do)</Description>
+    <Copyright>Copyright (c) 2018 Mohammad Babayi</Copyright>
+    <PackageLicenseUrl>https://github.com/chiefmb/NaturalStringComparer/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/chiefmb/NaturalStringComparer</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/chiefmb/NaturalStringComparer</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
 </Project>
