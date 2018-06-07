@@ -36,6 +36,8 @@ namespace Gihan.Helpers.StringHelper
                     var iDiff = StringComparer.OrdinalIgnoreCase.Compare(x[xp], y[yp]);
                     if (iDiff != 0)
                         return iDiff;
+                    xp++;
+                    yp++;
                 }
             }
             if (yp < y.Length)
