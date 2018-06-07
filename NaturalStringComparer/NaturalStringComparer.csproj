@@ -12,7 +12,7 @@
     <RepositoryUrl>https://github.com/chiefmb/NaturalStringComparer</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageId>Gihan.Helpers.StringHelper.GihanNaturalStringComparer</PackageId>
+    <PackageId>Gihan.Helpers.StringHelper.NaturalStringComparer</PackageId>
   </PropertyGroup>
 
 </Project>
