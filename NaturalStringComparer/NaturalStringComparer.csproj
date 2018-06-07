@@ -2,9 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>Gihan.Helpers</RootNamespace>
-    <Authors>Muhammad Babayi</Authors>
-    <Company>GihanSoft</Company>
   </PropertyGroup>
 
 </Project>
