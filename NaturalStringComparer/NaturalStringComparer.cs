@@ -33,7 +33,7 @@ namespace Gihan.Helpers.StringHelper
                 }
                 else
                 {
-                    var iDiff = StringComparer.OrdinalIgnoreCase.Compare(x[xp], y[yp]);
+                    var iDiff = x[xp].ToString().CompareTo(y[yp].ToString());
                     if (iDiff != 0)
                         return iDiff;
                     xp++;
