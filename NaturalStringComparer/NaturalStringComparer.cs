@@ -5,6 +5,20 @@ namespace Gihan.Helpers.StringHelper
 {
     public class NaturalStringComparer : IComparer<string>
     {
+        private static NaturalStringComparer _default;
+        private static readonly object Look = new object();
+
+        public static NaturalStringComparer Default
+        {
+            get
+            {
+                lock (Look)
+                {
+                    return _default ?? (_default = new NaturalStringComparer());
+                }
+            }
+        }
+
         public int Compare(string x, string y)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
@@ -33,7 +47,7 @@ namespace Gihan.Helpers.StringHelper
                 }
                 else
                 {
-                    var iDiff = x[xp].ToString().CompareTo(y[yp].ToString());
+                    var iDiff = string.Compare(x[xp].ToString(), y[yp].ToString(), StringComparison.Ordinal);
                     if (iDiff != 0)
                         return iDiff;
                     xp++;
@@ -45,15 +59,14 @@ namespace Gihan.Helpers.StringHelper
             return 0;
         }
 
-
-        private static int StrToInt(string Str, int startIndex = 0)
+        private static int StrToInt(string str, int startIndex = 0)
         {
-            Str = Str.Substring(startIndex);
-            var DigitsEnd = 0;
-            while (char.IsDigit(Str[DigitsEnd]))
-                DigitsEnd++;
-            Str = Str.Substring(0, DigitsEnd);
-            return int.Parse(Str);
+            str = str.Substring(startIndex);
+            var digitsEnd = 0;
+            while (digitsEnd < str.Length && char.IsDigit(str[digitsEnd]))
+                digitsEnd++;
+            str = str.Substring(0, digitsEnd);
+            return int.Parse(str);
         }
     }
 }

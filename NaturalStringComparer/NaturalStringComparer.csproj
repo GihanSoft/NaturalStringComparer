@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>Gihan.Helpers</RootNamespace>
+    <RootNamespace>Gihan.Helpers.StringHelper</RootNamespace>
     <Authors>Muhammad Babayi</Authors>
     <Company>GihanSoft</Company>
     <Description>Compare for string to sort by number in string (as windows explorer do)</Description>
@@ -13,7 +13,10 @@
     <RepositoryType>git</RepositoryType>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageId>Gihan.Helpers.StringHelper.NaturalStringComparer</PackageId>
-    <Version>1.1.2</Version>
+    <Version>1.2.0</Version>
+    <PackageReleaseNotes>1.2.0 :
+0-Fixed end of string number error!!!! (sorry for it)
+1- added Default static Instans for easy use.</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>
