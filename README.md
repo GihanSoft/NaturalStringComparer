@@ -4,7 +4,7 @@ This is an easy to use and useful little library for programs that want to sort 
 you know 2 is lower than 11 but C# default string comparer not know this or not like this.
 so you may lile to use my lib for a human friendly string comparing and sorting.
 
-```
+```C#
 var stringList = new List<string>
             {
                 "number1", "number2", "number3", "number4", "number10", "number15", "number22", "number26"
