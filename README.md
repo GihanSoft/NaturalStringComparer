@@ -10,13 +10,21 @@ var stringList = new List<string>
                 "number1", "number2", "number3", "number4", "number10", "number15", "number22", "number26"
                 , "number9", "number33", "number5", "number12"
             };
+stringList.Sort(NaturalStringComparer.Default);
+Console.WriteLine("Natural Sort:");
 foreach(var item in stringList)
 {
-  Console.WriteLine(item)
+  Console.WriteLine(item);
 }
-stringList.Sort(NaturalStringComparer.Default);
-/*
-list will be like this () :
+stringList.Sort();
+Console.WriteLine("Normal Sort:");
+Console.WriteLine();
+foreach(var item in stringList)
+{
+  Console.WriteLine(item);
+}
+/* output
+Natural Sort:
 number1
 number2
 number3
@@ -29,5 +37,19 @@ number15
 number22
 number26
 number33
+
+Normal Sort:
+number1
+number10
+number12
+number15
+number2
+number22
+number26
+number3
+number33
+number4
+number5
+number9
 */
 ```
