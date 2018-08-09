@@ -6,17 +6,16 @@ namespace Gihan.Helpers.StringHelper
     public class NaturalStringComparer : IComparer<string>
     {
         private static NaturalStringComparer _default;
-        private static readonly object Look = new object();
+        public static NaturalStringComparer Default => _default ?? (_default = new NaturalStringComparer());
 
-        public static NaturalStringComparer Default
+        private static int StrToInt(string str, int startIndex = 0)
         {
-            get
-            {
-                lock (Look)
-                {
-                    return _default ?? (_default = new NaturalStringComparer());
-                }
-            }
+            str = str.Substring(startIndex);
+            var digitsEnd = 0;
+            while (digitsEnd < str.Length && char.IsDigit(str[digitsEnd]))
+                digitsEnd++;
+            str = str.Substring(0, digitsEnd);
+            return int.Parse(str);
         }
 
         public int Compare(string x, string y)
@@ -58,15 +57,24 @@ namespace Gihan.Helpers.StringHelper
                 return -1;
             return 0;
         }
+    }
 
-        private static int StrToInt(string str, int startIndex = 0)
+    /// <summary>
+    /// Compare any type based on result of their ToString() objects;
+    /// </summary>
+    /// <typeparam name="T">
+    /// it can be any type
+    /// </typeparam>
+    public class NaturalStringComparer<T> : IComparer<T>
+    {
+        private static NaturalStringComparer<T> _default;
+        public static NaturalStringComparer<T> Default => _default ?? (_default = new NaturalStringComparer<T>());
+
+        public int Compare(T x, T y)
         {
-            str = str.Substring(startIndex);
-            var digitsEnd = 0;
-            while (digitsEnd < str.Length && char.IsDigit(str[digitsEnd]))
-                digitsEnd++;
-            str = str.Substring(0, digitsEnd);
-            return int.Parse(str);
+            if (x == null) throw new ArgumentNullException(nameof(x));
+            if (y == null) throw new ArgumentNullException(nameof(y));
+            return NaturalStringComparer.Default.Compare(x.ToString(), y.ToString());
         }
     }
 }
