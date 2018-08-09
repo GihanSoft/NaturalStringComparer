@@ -8,9 +8,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9F586DDC-96C8-4039-BF0B-6635AFFB1168}"
 	ProjectSection(SolutionItems) = preProject
 		LICENSE = LICENSE
+		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NaturalStringComparerTest", "NaturalStringComparerTest\NaturalStringComparerTest.csproj", "{479DF6EF-90D2-420F-B162-F8F26FEE772D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NaturalStringComparerTest", "NaturalStringComparerTest\NaturalStringComparerTest.csproj", "{479DF6EF-90D2-420F-B162-F8F26FEE772D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
