@@ -17,8 +17,8 @@ foreach(var item in stringList)
   Console.WriteLine(item);
 }
 stringList.Sort();
-Console.WriteLine("Normal Sort:");
 Console.WriteLine();
+Console.WriteLine("Normal Sort:");
 foreach(var item in stringList)
 {
   Console.WriteLine(item);
