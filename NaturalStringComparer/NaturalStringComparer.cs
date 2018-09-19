@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Gihan.Helpers.StringHelper
+namespace Gihan.Helpers.String
 {
     public class NaturalStringComparer : IComparer<string>
     {
@@ -78,4 +78,3 @@ namespace Gihan.Helpers.StringHelper
         }
     }
 }
-

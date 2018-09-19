@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Gihan.Helpers.StringHelper;
+using Gihan.Helpers.String;
 using Xunit;
 
 namespace NaturalStringComparerTest
