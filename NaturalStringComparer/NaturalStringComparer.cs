@@ -39,9 +39,9 @@ namespace Gihan.Helpers.StringHelper
                     if (nDiff != 0)
                         return nDiff;
 
-                    while (char.IsDigit(x[xp]))
+                    while (xp < x.Length && char.IsDigit(x[xp]))
                         xp++;
-                    while (char.IsDigit(y[yp]))
+                    while (yp < y.Length && char.IsDigit(y[yp]))
                         yp++;
                 }
                 else

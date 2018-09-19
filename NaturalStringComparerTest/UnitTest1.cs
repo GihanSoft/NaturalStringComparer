@@ -1,3 +1,7 @@
+
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Gihan.Helpers.StringHelper;
 using Xunit;
 
@@ -31,6 +35,13 @@ namespace NaturalStringComparerTest
         {
             var r = NaturalStringComparer.Default.Compare("num 1", "num 2");
             Assert.True(r < 0);
+        }
+
+        [Fact]
+        public void TestBugOfOnePunchMan()
+        {
+            var folders = new List<string> { "43", "43.5" };
+            folders.Sort(NaturalStringComparer<string>.Default);
         }
     }
 }
