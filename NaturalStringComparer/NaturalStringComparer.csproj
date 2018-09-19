@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>Gihan.Helpers.StringHelper</RootNamespace>
+    <RootNamespace>Gihan.Helpers.String</RootNamespace>
     <Authors>Muhammad Babayi</Authors>
     <Company>GihanSoft</Company>
     <Description>Compare for string to sort by number in string (as windows explorer do)</Description>
@@ -13,8 +13,9 @@
     <RepositoryType>git</RepositoryType>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageId>Gihan.Helpers.StringHelper.NaturalStringComparer</PackageId>
-    <Version>1.3.1</Version>
-    <PackageReleaseNotes>A bug fixed</PackageReleaseNotes>
+    <Version>1.3.2</Version>
+    <PackageReleaseNotes>name space fixed</PackageReleaseNotes>
+    <PackageTags>string, comparer, IComparer, NaturalComparer, NaturalStringComparer</PackageTags>
   </PropertyGroup>
 
 </Project>
