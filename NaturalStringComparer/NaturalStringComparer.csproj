@@ -13,9 +13,10 @@
     <RepositoryType>git</RepositoryType>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageId>Gihan.Helpers.StringHelper.NaturalStringComparer</PackageId>
-    <Version>1.3.2</Version>
+    <Version>1.3.3</Version>
     <PackageReleaseNotes>name space fixed</PackageReleaseNotes>
     <PackageTags>string, comparer, IComparer, NaturalComparer, NaturalStringComparer</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
 </Project>
