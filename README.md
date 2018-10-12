@@ -1,8 +1,8 @@
 # NaturalStringComparer
 [![Build status](https://ci.appveyor.com/api/projects/status/acwd0d2hwng5l5yh?svg=true)](https://ci.appveyor.com/project/chiefmb/naturalstringcomparer)
 
-<b>Pure C# code</b>
-usable in .net core. no need to windows api.
+### Pure C# code
+#### usable in .net core. no need to windows api.
 Comparer to sort strings by numbers in them (as windows explorer do)
 This is an easy to use and useful little library for programs that want to sort string naturaly by numbers.
 you know 2 is lower than 11 but C# default string comparer not know this or not like this.
