@@ -1,7 +1,4 @@
-
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using Gihan.Helpers.String;
 using Xunit;
 
@@ -40,8 +37,10 @@ namespace NaturalStringComparerTest
         [Fact]
         public void TestBugOfOnePunchMan()
         {
-            var folders = new List<string> { "43", "43.5" };
-            folders.Sort(NaturalStringComparer<string>.Default);
+            var ss = new List<string> { "43.zip", "43.5.zip" };
+            ss.Sort(NaturalStringComparer<string>.Default);
+            
+            Assert.Equal("43.5.zip", ss[0]);
         }
     }
 }

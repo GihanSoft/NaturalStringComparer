@@ -13,8 +13,10 @@
     <RepositoryType>git</RepositoryType>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageId>Gihan.Helpers.StringHelper.NaturalStringComparer</PackageId>
-    <Version>1.3.4</Version>
-    <PackageReleaseNotes>name space fixed</PackageReleaseNotes>
+    <Version>1.4</Version>
+    <PackageReleaseNotes>* List&lt;T&gt;.NaturalSort() added.
+* IEnumerable&lt;T&gt;.NaturalOrderBy() added
+* IEnumerable&lt;T&gt;.NaturalOrderByDescending() added</PackageReleaseNotes>
     <PackageTags>string, comparer, IComparer, NaturalComparer, NaturalStringComparer</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
