@@ -23,8 +23,8 @@ namespace Gihan.Helpers.String
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
 
-            if (string.IsNullOrEmpty(x)) throw new ArgumentException("Arguman is Empty", nameof(x));
-            if (string.IsNullOrEmpty(y)) throw new ArgumentException("Arguman is Empty", nameof(y));
+            if (string.IsNullOrEmpty(x)) throw new ArgumentException("Argument is Empty", nameof(x));
+            if (string.IsNullOrEmpty(y)) throw new ArgumentException("Argument is Empty", nameof(y));
 
             int xp = 0, yp = 0;
             while (xp < x.Length)
