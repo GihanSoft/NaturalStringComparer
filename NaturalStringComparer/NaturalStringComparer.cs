@@ -8,54 +8,54 @@ namespace Gihan.Helpers.String
         private static NaturalStringComparer _default;
         public static NaturalStringComparer Default => _default ?? (_default = new NaturalStringComparer());
 
-        private static int StrToInt(string str, int startIndex = 0)
-        {
-            str = str.Substring(startIndex);
-            var digitsEnd = 0;
-            while (digitsEnd < str.Length && char.IsDigit(str[digitsEnd]))
-                digitsEnd++;
-            str = str.Substring(0, digitsEnd);
-            return int.Parse(str);
-        }
-
         public int Compare(string x, string y)
         {
-            if (x == null) throw new ArgumentNullException(nameof(x));
-            if (y == null) throw new ArgumentNullException(nameof(y));
-
             if (string.IsNullOrEmpty(x)) throw new ArgumentException("Argument is Empty", nameof(x));
             if (string.IsNullOrEmpty(y)) throw new ArgumentException("Argument is Empty", nameof(y));
 
-            int xp = 0, yp = 0;
-            while (xp < x.Length)
-            {
-                if (yp == y.Length)
-                    return 1;
-                if (char.IsDigit(x[xp]) && char.IsDigit(y[yp]))
-                {
-                    var xNum = StrToInt(x, xp);
-                    var yNum = StrToInt(y, yp);
-                    var nDiff = Comparer<int>.Default.Compare(xNum, yNum);
-                    if (nDiff != 0)
-                        return nDiff;
+            var xEnumer = x.GetEnumerator();
+            var yEnumer = y.GetEnumerator();
+            var xNotExit = xEnumer.MoveNext();
+            var yNotExit = yEnumer.MoveNext();
 
-                    while (xp < x.Length && char.IsDigit(x[xp]))
-                        xp++;
-                    while (yp < y.Length && char.IsDigit(y[yp]))
-                        yp++;
-                }
-                else
+            while (xNotExit && yNotExit)
+            {
+                if (char.IsNumber(xEnumer.Current) && char.IsNumber(yEnumer.Current))
                 {
-                    var iDiff = string.Compare(x[xp].ToString(), y[yp].ToString(), StringComparison.Ordinal);
-                    if (iDiff != 0)
-                        return iDiff;
-                    xp++;
-                    yp++;
+                    var xNumStr = "" + xEnumer.Current;
+                    var yNumStr = "" + yEnumer.Current;
+                    xNotExit = xEnumer.MoveNext();
+                    yNotExit = yEnumer.MoveNext();
+
+                    while (xNotExit && char.IsDigit(xEnumer.Current))
+                    {
+                        xNumStr += xEnumer.Current;
+                        xNotExit = xEnumer.MoveNext();
+                    }
+                    while (yNotExit && char.IsDigit(yEnumer.Current))
+                    {
+                        yNumStr += yEnumer.Current;
+                        yNotExit = yEnumer.MoveNext();
+                    }
+
+                    var xNum = double.Parse(xNumStr);
+                    var yNum = double.Parse(yNumStr);
+
+                    if (xNum != yNum) return xNum.CompareTo(yNum);
+                    else if (!xNotExit && !yNotExit)
+                        return 0;
                 }
+                if (xEnumer.Current != yEnumer.Current)
+                    return xEnumer.Current.CompareTo(yEnumer.Current);
+                xNotExit = xEnumer.MoveNext();
+                yNotExit = yEnumer.MoveNext();
             }
-            if (yp < y.Length)
+            if (xNotExit)
+                return 1;
+            else if (yNotExit)
                 return -1;
-            return 0;
+            else
+                return 0;
         }
     }
 

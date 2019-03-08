@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Gihan.Helpers.String;
 using Xunit;
@@ -6,11 +7,15 @@ namespace NaturalStringComparerTest
 {
     public class UnitTest1
     {
+        private readonly Random rnd = new Random();
+
         [Fact]
         public void Test0()
         {
-            var result = NaturalStringComparer.Default.Compare("text 11", "text 2");
-            Assert.True(result > 0);
+            var num1 = rnd.Next();
+            var num2 = rnd.Next();
+            var result = NaturalStringComparer.Default.Compare($"text {num1}", $"text {num2}");
+            Assert.Equal(num1.CompareTo(num2), result);
         }
 
         [Fact]
@@ -67,6 +72,15 @@ namespace NaturalStringComparerTest
         {
             var r = NaturalStringComparer.Default.Compare("033", "33");
             Assert.Equal(0, r);
+        }
+
+        [Fact]
+        public void Test9()
+        {
+            var num1 = 911651651;
+            var num2 = 911651615;
+            var r = NaturalStringComparer.Default.Compare($"{num1}", $"{num2}");
+            Assert.Equal(num1.CompareTo(num2), r);
         }
     }
 }
