@@ -20,12 +20,8 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <AssemblyName>Gihan.NaturalStringComparer</AssemblyName>
     <ApplicationIcon>gihansoft.ico</ApplicationIcon>
-    <PackageIconUrl>https://raw.githubusercontent.com/chiefmb/NaturalStringComparer/master/gihansoft.ico</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/chiefmb/NaturalStringComparer/NaturalStringComparer/master/gihansoft.ico</PackageIconUrl>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Content Include="..\gihansoft.ico" Link="gihansoft.ico" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\LICENSE">
