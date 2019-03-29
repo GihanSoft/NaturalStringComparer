@@ -13,13 +13,19 @@
     <RepositoryType>git</RepositoryType>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageId>Gihan.Helpers.StringHelper.NaturalStringComparer</PackageId>
-    <Version>1.5.0</Version>
-    <PackageReleaseNotes>nothing changed but implementation</PackageReleaseNotes>
+    <Version>1.5.1</Version>
+    <PackageReleaseNotes>bug fixed</PackageReleaseNotes>
     <PackageTags>string, comparer, IComparer, NaturalComparer, NaturalStringComparer</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <AssemblyName>Gihan.NaturalStringComparer</AssemblyName>
+    <ApplicationIcon>gihansoft.ico</ApplicationIcon>
+    <PackageIconUrl>https://raw.githubusercontent.com/chiefmb/NaturalStringComparer/master/gihansoft.ico</PackageIconUrl>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="..\gihansoft.ico" Link="gihansoft.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\LICENSE">
