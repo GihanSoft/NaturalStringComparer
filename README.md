@@ -16,7 +16,11 @@ var stringList = new List<string>
                 "number1", "number2", "number3", "number4", "number10", "number15", "number22", "number26"
                 , "number9", "number33", "number5", "number12"
             };
+
 stringList.Sort(NaturalStringComparer.Default);
+//or
+stringList.NaturalSort(); // need "using Gihan.Helpers.Linq;"
+
 Console.WriteLine("Natural Sort:");
 foreach(var item in stringList)
 {

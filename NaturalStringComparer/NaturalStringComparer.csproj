@@ -13,8 +13,9 @@
     <RepositoryType>git</RepositoryType>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageId>Gihan.Helpers.StringHelper.NaturalStringComparer</PackageId>
-    <Version>1.5.1</Version>
-    <PackageReleaseNotes>bug fixed</PackageReleaseNotes>
+    <Version>1.5.2</Version>
+    <PackageReleaseNotes>IOrderedEnumerable&lt;TSource&gt; Gihan.Helpers.Linq.NaturalOrderByDescending&lt;TSource, TKey&gt; (this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, TKey&gt; keySelector)
+become public</PackageReleaseNotes>
     <PackageTags>string, comparer, IComparer, NaturalComparer, NaturalStringComparer</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
