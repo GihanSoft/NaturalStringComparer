@@ -41,10 +41,12 @@ namespace Gihan.Helpers.String
                     var xNum = double.Parse(xNumStr);
                     var yNum = double.Parse(yNumStr);
 
-                    if (xNum != yNum) return xNum.CompareTo(yNum);
-                    else if (!xNotExit && !yNotExit)
-                        return 0;
+                    if (xNum != yNum)
+                        return xNum.CompareTo(yNum);
+                    if (!xNotExit || !yNotExit)
+                        break;
                 }
+                
                 if (xEnumer.Current != yEnumer.Current)
                     return xEnumer.Current.CompareTo(yEnumer.Current);
                 xNotExit = xEnumer.MoveNext();

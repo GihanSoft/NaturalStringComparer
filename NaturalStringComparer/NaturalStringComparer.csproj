@@ -13,10 +13,12 @@
     <RepositoryType>git</RepositoryType>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageId>Gihan.Helpers.StringHelper.NaturalStringComparer</PackageId>
-    <Version>1.5.2</Version>
-    <PackageReleaseNotes>IOrderedEnumerable&lt;TSource&gt; Gihan.Helpers.Linq.NaturalOrderByDescending&lt;TSource, TKey&gt; (this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, TKey&gt; keySelector)
-become public</PackageReleaseNotes>
-    <PackageTags>string, comparer, IComparer, NaturalComparer, NaturalStringComparer</PackageTags>
+    <Version>1.6.0</Version>
+    <PackageReleaseNotes>1.6.0:
+1- NaturalThenBy() added
+2- NaturalThenByDescending added
+3- a bug fixed</PackageReleaseNotes>
+    <PackageTags>string, comparer, IComparer, NaturalComparer, NaturalStringComparer, Natural-Sort, NaturalSort, String-Comparison, StringComparer, Sorting, Sort, Natural, csharp, c-sharp, C#, </PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <AssemblyName>Gihan.NaturalStringComparer</AssemblyName>

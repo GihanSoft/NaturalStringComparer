@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Gihan.Helpers.String;
+using Gihan.Helpers.Linq;
 using Xunit;
+using System.Linq;
 
 namespace NaturalStringComparerTest
 {
@@ -81,6 +83,13 @@ namespace NaturalStringComparerTest
             var num2 = 911651615;
             var r = NaturalStringComparer.Default.Compare($"{num1}", $"{num2}");
             Assert.Equal(num1.CompareTo(num2), r);
+        }
+
+        [Fact]
+        public void Test10()
+        {
+            var r = NaturalStringComparer.Default.Compare("hi2", "hi2hi");
+            Assert.True(r < 0);
         }
     }
 }
