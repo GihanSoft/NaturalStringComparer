@@ -15,7 +15,7 @@ namespace Gihan.Helpers.Linq
                 => source.OrderBy(keySelector, NaturalStringComparer<TKey>.Default);
 
         public static IOrderedEnumerable<TSource> NaturalOrderByDescending<TSource, TKey>
-            (this IEnumerable<TSource> source, Func<TSource, TKey> keySelector) 
+            (this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
                 => source.OrderByDescending(keySelector, NaturalStringComparer<TKey>.Default);
 
         public static IOrderedEnumerable<TSource> NaturalThenBy<TSource, TKey>
