@@ -1,9 +1,6 @@
 using System;
-using System.Collections.Generic;
-using Gihan.Helpers.String;
-using Gihan.Helpers.Linq;
 using Xunit;
-using System.Linq;
+using GihanSoft;
 
 namespace NaturalStringComparerTest
 {

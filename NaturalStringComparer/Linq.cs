@@ -1,9 +1,8 @@
-﻿using Gihan.Helpers.String;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Gihan.Helpers.Linq
+namespace GihanSoft.Linq
 {
     public static class Linq
     {

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>Gihan.Helpers.String</RootNamespace>
+    <RootNamespace>GihanSoft.NaturalStringComparer</RootNamespace>
     <Authors>Muhammad Babayi</Authors>
     <Company>GihanSoft</Company>
     <Description>Compare for string to sort by number in string (as windows explorer do)</Description>
@@ -12,16 +12,13 @@
     <RepositoryUrl>https://github.com/chiefmb/NaturalStringComparer</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageId>Gihan.Helpers.StringHelper.NaturalStringComparer</PackageId>
-    <Version>1.6.0</Version>
-    <PackageReleaseNotes>1.6.0:
-1- NaturalThenBy() added
-2- NaturalThenByDescending added
-3- a bug fixed</PackageReleaseNotes>
+    <PackageId>GihanSoft.NaturalStringComparer</PackageId>
+    <Version>1.7.0</Version>
+    <PackageReleaseNotes></PackageReleaseNotes>
     <PackageTags>string, comparer, IComparer, NaturalComparer, NaturalStringComparer, Natural-Sort, NaturalSort, String-Comparison, StringComparer, Sorting, Sort, Natural, csharp, c-sharp, C#, </PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <AssemblyName>Gihan.NaturalStringComparer</AssemblyName>
+    <AssemblyName>GihanSoft.NaturalStringComparer</AssemblyName>
     <ApplicationIcon>gihansoft.ico</ApplicationIcon>
     <PackageIconUrl>https://raw.githubusercontent.com/chiefmb/NaturalStringComparer/NaturalStringComparer/master/gihansoft.ico</PackageIconUrl>
   </PropertyGroup>
