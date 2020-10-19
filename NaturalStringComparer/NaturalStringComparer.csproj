@@ -6,7 +6,7 @@
     <Authors>Muhammad Babayi</Authors>
     <Company>GihanSoft</Company>
     <Description>Compare for string to sort by number in string (as windows explorer do)</Description>
-    <Copyright>Copyright (c) 2018 Mohammad Babayi</Copyright>
+    <Copyright>Copyright (c) 2020 Mohammad Babayi</Copyright>
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/GihanSoft/NaturalStringComparer</PackageProjectUrl>
     <RepositoryUrl>https://github.com/GihanSoft/NaturalStringComparer</RepositoryUrl>
@@ -20,11 +20,16 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <AssemblyName>GihanSoft.NaturalStringComparer</AssemblyName>
     <ApplicationIcon>gihansoft.ico</ApplicationIcon>
-    <PackageIconUrl>https://raw.githubusercontent.com/chiefmb/NaturalStringComparer/NaturalStringComparer/master/gihansoft.ico</PackageIconUrl>
+    <PackageIconUrl></PackageIconUrl>
+    <PackageIcon>GihanSoft.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="E:\Pictures\Photoshop Workspace\GihanSoft\GihanSoft.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
