@@ -20,8 +20,10 @@ namespace NaturalStringComparerTest
         [Fact]
         public void Test1()
         {
-            var r = NaturalStringComparer.Default.Compare("_qwerty", "0qwerty");
-            Assert.True(r > 0);
+            var r1 = NaturalStringComparer.Default.Compare("_qwerty", "0qwerty");
+            Assert.True(r1 < 0);
+            var r2 = NaturalStringComparer.Default.Compare("[qwerty", "_qwerty");
+            Assert.True(r2 < 0);
         }
 
         [Fact]

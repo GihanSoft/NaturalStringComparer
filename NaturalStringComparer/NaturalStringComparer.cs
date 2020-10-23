@@ -70,7 +70,7 @@ namespace GihanSoft
                     return 1;
 
                 if (xEnumer.Current != yEnumer.Current)
-                    return xEnumer.Current.CompareTo(yEnumer.Current);
+                    return xEnumer.Current.ToString().CompareTo(yEnumer.Current.ToString());
             }
         }
 
