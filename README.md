@@ -96,28 +96,34 @@ public class NaturalComparer : IComparer<string?>
 #### extension methods
 
 ```C#
+// List<T> extension
 public static void NaturalSort<TSource>(
             this List<TSource> src,
             Func<TSource, string?>? keySelector = null,
             StringComparison stringComparison = StringComparison.Ordinal);
 
+// T[] extension
 public static void NaturalSort<TSource>(
             this TSource[] src,
             Func<TSource, string?>? keySelector = null,
             StringComparison stringComparison = StringComparison.Ordinal);
 
+// IEnumerable<T> extensions
 public static IOrderedEnumerable<TSource> NaturalOrderBy<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, string?>? keySelector = null,
             StringComparison stringComparison = StringComparison.Ordinal);
+
 public static IOrderedEnumerable<TSource> NaturalOrderByDescending<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, string?>? keySelector = null,
             StringComparison stringComparison = StringComparison.Ordinal);
+            
 public static IOrderedEnumerable<TSource> NaturalThenBy<TSource>(
             this IOrderedEnumerable<TSource> source,
             Func<TSource, string?>? keySelector = null,
             StringComparison stringComparison = StringComparison.Ordinal);
+            
 public static IOrderedEnumerable<TSource> NaturalThenByDescending<TSource>(
             this IOrderedEnumerable<TSource> source,
             Func<TSource, string?>? keySelector = null,
