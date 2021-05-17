@@ -6,19 +6,17 @@ on:
     branches:
       - master # Default release branch
 jobs:
-  test:
-    name: test
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: test
-        id: test
-        run: dotnet test {{env.TESTPROJPATH}}
   publish:
-    name: build, pack & publish
+    name: build, test, pack & publish
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
+      - run: dotnet test {{env.TESTPROJPATH}}
+#  publish:
+#    name: build, pack & publish
+#    runs-on: windows-latest
+#    steps:
+#      - uses: actions/checkout@v2
 
       # Install the .NET Core workload
       #- name: Install .NET Core
