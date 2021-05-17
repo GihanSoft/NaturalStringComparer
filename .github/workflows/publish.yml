@@ -12,13 +12,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: dotnet restore
-      - run: dotnet test .\NaturalStringComparerTest\NaturalStringComparerTest.csproj
+      - name: test
+        run: dotnet test .\NaturalStringComparerTest\NaturalStringComparerTest.csproj
       - name: publish on version change
         id: publish_nuget
         uses: rohith/publish-nuget@v2
         with:
           # Filepath of the project to be packaged, relative to root of repository
-          PROJECT_FILE_PATH: NaturalStringComparer.Unsafe
+          PROJECT_FILE_PATH: .\NaturalStringComparer.Unsafe\NaturalStringComparer.Unsafe.csproj
 
           # Regex pattern to extract version info in a capturing group
           # VERSION_REGEX: ^\s*<Version>(.*)<\/Version>\s*$
