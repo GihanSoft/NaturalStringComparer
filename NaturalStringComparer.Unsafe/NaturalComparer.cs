@@ -15,12 +15,14 @@ namespace GihanSoft.String
     /// </summary>
     public class NaturalComparer : IComparer<string?>
     {
-        private static readonly Lazy<NaturalComparer> LazyCurrentCulture = new (() => new NaturalComparer(StringComparison.CurrentCulture));
-        private static readonly Lazy<NaturalComparer> LazyCurrentCultureIgnoreCase = new (() => new NaturalComparer(StringComparison.CurrentCultureIgnoreCase));
+        private static readonly Lazy<NaturalComparer> LazyCurrentCulture = new(() => new NaturalComparer(StringComparison.CurrentCulture));
+        private static readonly Lazy<NaturalComparer> LazyCurrentCultureIgnoreCase = new(() => new NaturalComparer(StringComparison.CurrentCultureIgnoreCase));
+#if !NETSTANDARD1_0
         private static readonly Lazy<NaturalComparer> LazyInvariantCulture = new (() => new NaturalComparer(StringComparison.InvariantCulture));
         private static readonly Lazy<NaturalComparer> LazyInvariantCultureIgnoreCase = new (() => new NaturalComparer(StringComparison.InvariantCultureIgnoreCase));
-        private static readonly Lazy<NaturalComparer> LazyOrdinal = new (() => new NaturalComparer(StringComparison.Ordinal));
-        private static readonly Lazy<NaturalComparer> LazyOrdinalIgnoreCase = new (() => new NaturalComparer(StringComparison.OrdinalIgnoreCase));
+#endif
+        private static readonly Lazy<NaturalComparer> LazyOrdinal = new(() => new NaturalComparer(StringComparison.Ordinal));
+        private static readonly Lazy<NaturalComparer> LazyOrdinalIgnoreCase = new(() => new NaturalComparer(StringComparison.OrdinalIgnoreCase));
 
         private readonly StringComparison stringComparison;
 
@@ -43,6 +45,7 @@ namespace GihanSoft.String
         /// </summary>
         public static NaturalComparer CurrentCultureIgnoreCase => LazyCurrentCultureIgnoreCase.Value;
 
+#if !NETSTANDARD1_0
         /// <summary>
         /// Gets default Comparer that uses <see cref="StringComparison.InvariantCulture"/>.
         /// </summary>
@@ -52,7 +55,7 @@ namespace GihanSoft.String
         /// Gets default Comparer that uses <see cref="StringComparison.InvariantCultureIgnoreCase"/>.
         /// </summary>
         public static NaturalComparer InvariantCultureIgnoreCase => LazyInvariantCultureIgnoreCase.Value;
-
+#endif
         /// <summary>
         /// Gets default Comparer that uses <see cref="StringComparison.Ordinal"/>.
         /// </summary>

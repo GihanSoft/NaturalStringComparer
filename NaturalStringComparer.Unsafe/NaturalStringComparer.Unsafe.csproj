@@ -1,11 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>netstandard2.0;net5.0</TargetFrameworks>
+        <TargetFrameworks>netstandard1.0;netstandard2.0;net5.0</TargetFrameworks>
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 
+        <Version>2.1.0</Version>
         <RootNamespace>GihanSoft.String</RootNamespace>
         <Authors>Muhammad Babayi</Authors>
         <Company>GihanSoft</Company>
@@ -16,8 +17,10 @@
         <RepositoryType>git</RepositoryType>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <PackageId>GihanSoft.String.NaturalComparer</PackageId>
-        <Version>2.0.0</Version>
-        <PackageReleaseNotes>use unsafe code for more speed</PackageReleaseNotes>
+        <PackageReleaseNotes>2.0.0:
+use unsafe code for more speed
+2.1.0:
+support for .net standard 1.0</PackageReleaseNotes>
         <PackageTags>string, comparer, IComparer, NaturalComparer, NaturalStringComparer, Natural-Sort, NaturalSort, String-Comparison, StringComparer, Sorting, Sort, Natural, csharp, c-sharp, C#, </PackageTags>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
