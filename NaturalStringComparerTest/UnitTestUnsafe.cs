@@ -1,6 +1,7 @@
 namespace NaturalStringComparerTest
 {
     using System;
+    using System.Collections.Generic;
 
     using GihanSoft.String;
 
@@ -113,6 +114,62 @@ namespace NaturalStringComparerTest
                     $"a long text to show better difference of compare methods {nums[i + 1]} hghf");
                 Assert.Equal(nums[i].CompareTo(nums[i + 1]), result);
             }
+        }
+
+        [Fact]
+        void TT()
+        {
+            var stringList = new List<string>
+            {
+                "number1", "number2", "number3", "number4", "number10", "number15", "number22", "number26"
+                , "number9", "number33", "number5", "number12"
+            };
+
+            stringList.Sort(NaturalComparer.Ordinal);
+            //or
+            stringList.NaturalSort(); // need "using Gihan.Helpers.Linq;"
+
+            Console.WriteLine("Natural Sort:");
+            foreach (var item in stringList)
+            {
+                Console.WriteLine(item);
+            }
+            stringList.Sort();
+            Console.WriteLine();
+            Console.WriteLine("Normal Sort:");
+            foreach (var item in stringList)
+            {
+                Console.WriteLine(item);
+            }
+            /* output
+            Natural Sort:
+            number1
+            number2
+            number3
+            number4
+            number5
+            number9
+            number10
+            number12
+            number15
+            number22
+            number26
+            number33
+
+            Normal Sort:
+            number1
+            number10
+            number12
+            number15
+            number2
+            number22
+            number26
+            number3
+            number33
+            number4
+            number5
+            number9
+            */
         }
     }
 }
