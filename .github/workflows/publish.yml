@@ -1,6 +1,6 @@
 name: publish to nuget
 env:
-  TESTPROJPATH: NaturalStringComparerTest
+  TESTPROJPATH: '.\NaturalStringComparerTest'
 on:
   push:
     branches:
@@ -11,6 +11,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
+      - run: dotnet restore
       - run: dotnet test {{env.TESTPROJPATH}}
 #  publish:
 #    name: build, pack & publish
