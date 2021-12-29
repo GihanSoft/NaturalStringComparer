@@ -1,75 +1,99 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFrameworks>netstandard1.0;netstandard2.0;net5.0</TargetFrameworks>
-        <LangVersion>latest</LangVersion>
-        <Nullable>enable</Nullable>
-        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  <PropertyGroup>
+    <TargetFrameworks>netstandard1.0;netstandard2.0;net6.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 
-        <Version>2.1.0</Version>
-        <RootNamespace>GihanSoft.String</RootNamespace>
-        <Authors>Muhammad Babayi</Authors>
-        <Company>GihanSoft</Company>
-        <Description>Comparer for strings to sort by number in it (as windows explorer do)</Description>
-        <Copyright>Copyright (c) 2021 Mohammad Babayi</Copyright>
-        <PackageProjectUrl>https://github.com/GihanSoft/NaturalStringComparer</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/GihanSoft/NaturalStringComparer</RepositoryUrl>
-        <RepositoryType>git</RepositoryType>
-        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <PackageId>GihanSoft.String.NaturalComparer</PackageId>
-        <PackageReleaseNotes>2.0.0:
-use unsafe code for more speed
-2.1.0:
-support for .net standard 1.0</PackageReleaseNotes>
-        <PackageTags>string, comparer, IComparer, NaturalComparer, NaturalStringComparer, Natural-Sort, NaturalSort, String-Comparison, StringComparer, Sorting, Sort, Natural, csharp, c-sharp, C#, </PackageTags>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageLicenseFile>LICENSE</PackageLicenseFile>
-        <AssemblyName>GihanSoft.NaturalStringComparer</AssemblyName>
-        <ApplicationIcon></ApplicationIcon>
-        <PackageIconUrl></PackageIconUrl>
-        <PackageIcon>GihanSoft-logo.png</PackageIcon>
-    </PropertyGroup>
+    <Version>2.1.1</Version>
+    <RootNamespace>GihanSoft.String</RootNamespace>
+    <Authors>Muhammad Babayi</Authors>
+    <Company>GihanSoft</Company>
+    <Description>Comparer for strings to sort by number in it (as windows explorer do)</Description>
+    <Copyright>Copyright (c) 2021 Mohammad Babayi</Copyright>
+    <PackageProjectUrl>https://github.com/GihanSoft/NaturalStringComparer</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/GihanSoft/NaturalStringComparer</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageId>GihanSoft.String.NaturalComparer</PackageId>
+    <PackageReleaseNotes>
+      2.0.0:
+      use unsafe code for more speed
+      2.1.0:
+      support for .net standard 1.0
+      2.1.1:
+      remove stylecop.json from client code
+    </PackageReleaseNotes>
+    <PackageTags>string, comparer, IComparer, NaturalComparer, NaturalStringComparer, Natural-Sort, NaturalSort, String-Comparison, StringComparer, Sorting, Sort, Natural, csharp, c-sharp, C#, </PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <AssemblyName>GihanSoft.NaturalStringComparer</AssemblyName>
+    <ApplicationIcon></ApplicationIcon>
+    <PackageIconUrl></PackageIconUrl>
+    <PackageIcon>GihanSoft-logo.png</PackageIcon>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <None Include="..\GihanSoft-logo.png">
-            <Pack>True</Pack>
-            <PackagePath></PackagePath>
-        </None>
-        <None Include="..\LICENSE">
-            <Pack>True</Pack>
-            <PackagePath></PackagePath>
-        </None>
-        <AdditionalFiles Include="stylecop.json" />
-    </ItemGroup>
+  <ItemGroup>
+    <None Include="..\GihanSoft-logo.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
-    <ItemGroup Condition="'$(Configuration)'=='Debug'">
-        <PackageReference Include="StyleCop.Analyzers" Version="1.1.118" PrivateAssets="all">
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
+  <ItemGroup>
+    <AdditionalFiles Include="stylecop.json" />
+  </ItemGroup>
 
-        <PackageReference Include="SonarAnalyzer.CSharp" Version="8.22.0.31243" PrivateAssets="all">
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
+  <ItemGroup Condition="'$(Configuration)'=='Debug'">
+    <PackageReference Include="StyleCop.Analyzers" Version="*" PrivateAssets="all">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
 
-        <PackageReference Include="Roslynator.Analyzers" Version="3.1.0" PrivateAssets="all">
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="*">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
 
-        <PackageReference Include="SecurityCodeScan.VS2019" Version="5.1.0" PrivateAssets="all">
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
+    <PackageReference Include="Roslynator.CodeAnalysis.Analyzers" Version="*">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
 
-        <PackageReference Include="IDisposableAnalyzers" Version="3.4.13" PrivateAssets="all">
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
+    <PackageReference Include="Roslynator.Formatting.Analyzers" Version="*">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
 
-        <PackageReference Include="AsyncFixer" Version="1.5.1" PrivateAssets="all">
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitivex</IncludeAssets>
-        </PackageReference>
-    </ItemGroup>
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="*" PrivateAssets="all">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
 
-    <ItemGroup>
-      <Content Include="stylecop.json" />
-    </ItemGroup>
+    <PackageReference Include="Roslynator.Analyzers" Version="*" PrivateAssets="all">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+
+    <PackageReference Include="SecurityCodeScan.VS2019" Version="*" PrivateAssets="all">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+
+    <PackageReference Include="IDisposableAnalyzers" Version="*" PrivateAssets="all">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+
+    <PackageReference Include="AsyncFixer" Version="*" PrivateAssets="all">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitivex</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 
 </Project>
