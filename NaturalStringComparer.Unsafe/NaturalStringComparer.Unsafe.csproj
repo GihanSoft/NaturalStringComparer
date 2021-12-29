@@ -35,6 +35,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Using Remove="System.Net.Http" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="..\GihanSoft-logo.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
