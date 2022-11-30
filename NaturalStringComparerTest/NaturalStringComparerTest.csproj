@@ -14,7 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\NaturalStringComparer.Unsafe\NaturalStringComparer.Unsafe.csproj" />
+        <ProjectReference Include="..\NaturalStringComparer\NaturalStringComparer.csproj" />
     </ItemGroup>
 
 </Project>
