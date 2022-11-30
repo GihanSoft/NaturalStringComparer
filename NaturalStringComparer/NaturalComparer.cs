@@ -9,6 +9,9 @@ namespace GihanSoft.String;
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 /// <summary>
 /// Natural Comparer.
@@ -17,9 +20,9 @@ public class NaturalComparer : IComparer<string?>
 {
     private static readonly Lazy<NaturalComparer> LazyCurrentCulture = new(() => new NaturalComparer(StringComparison.CurrentCulture));
     private static readonly Lazy<NaturalComparer> LazyCurrentCultureIgnoreCase = new(() => new NaturalComparer(StringComparison.CurrentCultureIgnoreCase));
-#if !NETSTANDARD1_0
-    private static readonly Lazy<NaturalComparer> LazyInvariantCulture = new (() => new NaturalComparer(StringComparison.InvariantCulture));
-    private static readonly Lazy<NaturalComparer> LazyInvariantCultureIgnoreCase = new (() => new NaturalComparer(StringComparison.InvariantCultureIgnoreCase));
+#if !NETSTANDARD1_1
+    private static readonly Lazy<NaturalComparer> LazyInvariantCulture = new(() => new NaturalComparer(StringComparison.InvariantCulture));
+    private static readonly Lazy<NaturalComparer> LazyInvariantCultureIgnoreCase = new(() => new NaturalComparer(StringComparison.InvariantCultureIgnoreCase));
 #endif
     private static readonly Lazy<NaturalComparer> LazyOrdinal = new(() => new NaturalComparer(StringComparison.Ordinal));
     private static readonly Lazy<NaturalComparer> LazyOrdinalIgnoreCase = new(() => new NaturalComparer(StringComparison.OrdinalIgnoreCase));
@@ -45,7 +48,7 @@ public class NaturalComparer : IComparer<string?>
     /// </summary>
     public static NaturalComparer CurrentCultureIgnoreCase => LazyCurrentCultureIgnoreCase.Value;
 
-#if !NETSTANDARD1_0
+#if !NETSTANDARD1_1
 
     /// <summary>
     /// Gets default Comparer that uses <see cref="StringComparison.InvariantCulture"/>.
@@ -78,57 +81,41 @@ public class NaturalComparer : IComparer<string?>
     /// <returns>value that show comparison result.</returns>
     public static int Compare(string? x, string? y, StringComparison stringComparison)
     {
-        if (ReferenceEquals(x, y))
-        {
-            return 0;
-        }
+        if (ReferenceEquals(x, y)) { return 0; }
 
-        if (x is null)
-        {
-            return -1;
-        }
+        if (x is null) { return -1; }
 
-        if (y is null)
-        {
-            return 1;
-        }
+        if (y is null) { return 1; }
 
-        unsafe
+        var xSpan = x.AsSpan();
+        var ySpan = y.AsSpan();
+
+        while (xSpan.Length > 0 && ySpan.Length > 0)
         {
-            fixed (char* xp = x, yp = y)
+            ref var x0 = ref MemoryMarshal.GetReference(xSpan);
+            ref var y0 = ref MemoryMarshal.GetReference(ySpan);
+            if (char.IsDigit(x0) && char.IsDigit(y0))
             {
-                var xPointer = xp;
-                var yPointer = yp;
+                var xNum = GetNumber(ref xSpan);
+                var yNum = GetNumber(ref ySpan);
 
-                while (*xPointer != 0)
-                {
-                    if (*yPointer == 0)
-                    {
-                        return 1;
-                    }
+                var comp = xNum.CompareTo(yNum);
+                if (comp != 0) { return comp; }
 
-                    if (char.IsDigit(*xPointer) && char.IsDigit(*yPointer))
-                    {
-                        var xNum = GetNumber(&xPointer);
-                        var yNum = GetNumber(&yPointer);
-                        if (xNum != yNum)
-                        {
-                            return xNum > yNum ? 1 : -1;
-                        }
-                    }
-
-                    if (*xPointer != *yPointer)
-                    {
-                        return string.Compare((*xPointer).ToString(), (*yPointer).ToString(), stringComparison);
-                    }
-
-                    yPointer++;
-                    xPointer++;
-                }
-
-                return *yPointer == 0 ? 0 : -1;
+                continue;
             }
+
+            if (x0 != y0)
+            {
+                return MemoryExtensions.CompareTo(xSpan.Slice(0, 1), ySpan.Slice(0, 1), stringComparison);
+            }
+
+            xSpan = xSpan.Slice(1);
+            ySpan = ySpan.Slice(1);
         }
+
+        var diff = xSpan.Length - ySpan.Length;
+        return diff != 0 ? diff : x.Length - y.Length;
     }
 
     /// <summary>
@@ -139,15 +126,18 @@ public class NaturalComparer : IComparer<string?>
     /// <returns>value that show comparison result.</returns>
     public int Compare(string? x, string? y) => Compare(x, y, this.stringComparison);
 
-    private static unsafe int GetNumber(char** pointer)
+    private static int GetNumber(ref ReadOnlySpan<char> span)
     {
-        var number = 0;
-        while (**pointer != 0 && char.IsDigit(**pointer))
-        {
-            number = (10 * number) + Convert.ToByte((char)(**pointer - 48));
-            (*pointer)++;
-        }
+        var l = 0;
+        while (l < span.Length && char.IsDigit(span[l])) { l++; }
 
-        return number;
+#if NETSTANDARD1_1
+        var num = int.Parse(span.Slice(0, l).ToString(), NumberStyles.None);
+#else
+        var num = int.Parse(span.Slice(0, l), NumberStyles.None);
+#endif
+
+        span = span.Slice(l);
+        return num;
     }
 }

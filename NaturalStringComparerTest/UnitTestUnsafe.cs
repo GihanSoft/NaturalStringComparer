@@ -81,10 +81,19 @@ namespace NaturalStringComparerTest
             Assert.True(r < 0);
         }
 
+        
+
         [Fact]
         public void Test08()
         {
             var r = NaturalComparer.Ordinal.Compare("033", "33");
+            Assert.True(r > 0);
+        }
+
+        [Fact]
+        public void Test08_2()
+        {
+            var r = NaturalComparer.Ordinal.Compare("33", "33");
             Assert.Equal(0, r);
         }
 
