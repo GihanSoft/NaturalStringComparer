@@ -10,17 +10,17 @@ jobs:
     name: build, test, pack & publish
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.5.0
       - name: Setup .NET Core SDK
-        uses: actions/setup-dotnet@v1.9.0
+        uses: actions/setup-dotnet@v3.0.3
         with:
-          dotnet-version: '6.0.x'
+          dotnet-version: '7.0.x'
       - run: dotnet restore
       - name: test
         run: dotnet test .\NaturalStringComparerTest\NaturalStringComparerTest.csproj
       - name: publish on version change
         id: publish_nuget
-        uses: rohith/publish-nuget@v2
+        uses: brandedoutcast/publish-nuget@v2.5.5
         with:
           # Filepath of the project to be packaged, relative to root of repository
           PROJECT_FILE_PATH: .\NaturalStringComparer\NaturalStringComparer.csproj
