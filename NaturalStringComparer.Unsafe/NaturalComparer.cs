@@ -114,7 +114,8 @@ public class NaturalComparer : IComparer<string?>
             ySpan = ySpan.Slice(1);
         }
 
-        return x.Length - y.Length;
+        var diff = xSpan.Length - ySpan.Length;
+        return diff != 0 ? diff : x.Length - y.Length;
     }
 
     /// <summary>
