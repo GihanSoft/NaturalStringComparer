@@ -3,17 +3,17 @@
 
 ## install
 ```sh
-dotnet add package GihanSoft.String.NaturalComparer --version 2.1.0
+dotnet add package GihanSoft.String.NaturalComparer --version 3.0.0
 ```
 or
-```
-PM> Install-Package GihanSoft.String.NaturalComparer -Version 2.1.0
+```pwsh
+Install-Package GihanSoft.String.NaturalComparer -Version 3.0.0
 ```
 or
 ```xml
 <!-- add this to .csproj -->
 <ItemGroup>
-    <PackageReference Include="GihanSoft.String.NaturalComparer" Version="2.1.0" />
+    <PackageReference Include="GihanSoft.String.NaturalComparer" Version="3.0." />
 </ItemGroup>
 ```
 
@@ -38,7 +38,7 @@ var stringList = new List<string>
     , "number9", "number33", "number5", "number12"
 };
 
-stringList.Sort(NaturalComparer.Ordinal);
+stringList.Sort(new NaturalComparer(StringComparison.Ordinal));
 //or
 stringList.NaturalSort();
 
@@ -47,6 +47,7 @@ foreach(var item in stringList)
 {
   Console.WriteLine(item);
 }
+
 stringList.Sort();
 Console.WriteLine();
 Console.WriteLine("Normal Sort:");
@@ -54,6 +55,7 @@ foreach(var item in stringList)
 {
   Console.WriteLine(item);
 }
+
 /* output
 Natural Sort:
 number1
