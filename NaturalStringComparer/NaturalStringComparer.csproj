@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.1;netstandard2.0;netstandard2.1;net461;netcoreapp2.1;net6.0</TargetFrameworks>
+    <TargetFrameworks>netstandard1.1;netstandard2.0;netstandard2.1;net461;net6.0;net7.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
 
@@ -17,9 +17,11 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageId>GihanSoft.String.NaturalComparer</PackageId>
     <PackageReleaseNotes>
-      3.0.0:
-      Using Span to increase speed.
-    </PackageReleaseNotes>
+3.0.0:
+Using Span to increase speed.
+breaking changes:
+  - remove static comparers
+  - remove support of .net core 2.1</PackageReleaseNotes>
     <PackageTags>string, comparer, IComparer, NaturalComparer, NaturalStringComparer, Natural-Sort, NaturalSort, String-Comparison, StringComparer, Sorting, Sort, Natural, csharp, c-sharp, C#, </PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
@@ -27,6 +29,8 @@
     <ApplicationIcon></ApplicationIcon>
     <PackageIconUrl></PackageIconUrl>
     <PackageIcon>GihanSoft-logo.png</PackageIcon>
+    <Title>GihanSoft Natural String Comparer</Title>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.1' or '$(TargetFramework)' == 'netstandard2.0' or '$(TargetFramework)' == 'net461'">
@@ -45,6 +49,10 @@
     <None Include="..\LICENSE">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
 

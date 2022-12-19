@@ -111,10 +111,11 @@ public class NaturalComparer : IComparer<string?>, IComparer<ReadOnlyMemory<char
         }
 
 #if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER
-        number = int.Parse(span.Slice(0, i));
+        number = int.Parse(span[..i]);
+        return span[i..];
 #else
         number = int.Parse(span.Slice(0, i).ToString());
-#endif
         return span.Slice(i);
+#endif
     }
 }
