@@ -26,7 +26,7 @@ namespace NaturalStringComparerTest
         {
             var num1 = rnd.Next();
             var num2 = rnd.Next();
-            var result = NaturalComparer.Ordinal.Compare($"text {num1}", $"text {num2}");
+            var result = NaturalComparer.Compare($"text {num1}", $"text {num2}", StringComparison.Ordinal);
             Assert.Equal(num1.CompareTo(num2), result);
         }
 
@@ -35,65 +35,63 @@ namespace NaturalStringComparerTest
         {
             var r1 = NaturalComparer.Compare("_qwerty", "0qwerty", StringComparison.InvariantCulture);
             Assert.True(r1 < 0);
-            var r2 = NaturalComparer.Ordinal.Compare("[qwerty", "_qwerty");
+            var r2 = NaturalComparer.Compare("[qwerty", "_qwerty", StringComparison.Ordinal);
             Assert.True(r2 < 0);
         }
 
         [Fact]
         public void Test02()
         {
-            var r = NaturalComparer.Ordinal.Compare("some text", "some text");
+            var r = NaturalComparer.Compare("some text", "some text", StringComparison.Ordinal);
             Assert.True(r == 0);
         }
 
         [Fact]
         public void Test03()
         {
-            var r = NaturalComparer.Ordinal.Compare("number 1", "number 2");
+            var r = NaturalComparer.Compare("number 1", "number 2", StringComparison.Ordinal);
             Assert.True(r < 0);
         }
 
         [Fact]
         public void Test04()
         {
-            var r = NaturalComparer.Ordinal.Compare("12 hi 2", "3 hi 11");
+            var r = NaturalComparer.Compare("12 hi 2", "3 hi 11", StringComparison.Ordinal);
             Assert.True(r > 0);
         }
 
         [Fact]
         public void Test05()
         {
-            var r = NaturalComparer.Ordinal.Compare("text 1326 with", "text 999");
+            var r = NaturalComparer.Compare("text 1326 with", "text 999", StringComparison.Ordinal);
             Assert.True(r > 0);
         }
 
         [Fact]
         public void Test06()
         {
-            var r = NaturalComparer.Ordinal.Compare("1278.jpg", "33.jpg");
+            var r = NaturalComparer.Compare("1278.jpg", "33.jpg", StringComparison.Ordinal);
             Assert.True(r > 0);
         }
 
         [Fact]
         public void Test07()
         {
-            var r = NaturalComparer.Ordinal.Compare("compare 01278 and 3", "compare 1278 and 1000");
+            var r = NaturalComparer.Compare("compare 01278 and 3", "compare 1278 and 1000", StringComparison.Ordinal);
             Assert.True(r < 0);
         }
-
-        
 
         [Fact]
         public void Test08()
         {
-            var r = NaturalComparer.Ordinal.Compare("033", "33");
-            Assert.True(r > 0);
+            var r = NaturalComparer.Compare("033", "33", StringComparison.Ordinal);
+            Assert.True(r < 0);
         }
 
         [Fact]
         public void Test08_2()
         {
-            var r = NaturalComparer.Ordinal.Compare("33", "33");
+            var r = NaturalComparer.Compare("33", "33", StringComparison.Ordinal);
             Assert.Equal(0, r);
         }
 
@@ -102,14 +100,14 @@ namespace NaturalStringComparerTest
         {
             var num1 = 911651651;
             var num2 = 911651615;
-            var r = NaturalComparer.Ordinal.Compare($"{num1}", $"{num2}");
+            var r = NaturalComparer.Compare($"{num1}", $"{num2}", StringComparison.Ordinal);
             Assert.Equal(num1.CompareTo(num2), r);
         }
 
         [Fact]
         public void Test10()
         {
-            var r = NaturalComparer.Ordinal.Compare("hi2", "hi2hi");
+            var r = NaturalComparer.Compare("hi2", "hi2hi", StringComparison.Ordinal);
             Assert.True(r < 0);
         }
 
@@ -118,9 +116,7 @@ namespace NaturalStringComparerTest
         {
             for (var i = 0; i < n - 1; i++)
             {
-                var result = NaturalComparer.Ordinal.Compare(
-                    $"a long text to show better difference of compare methods {nums[i]}",
-                    $"a long text to show better difference of compare methods {nums[i + 1]} hghf");
+                var result = NaturalComparer.Compare($"a long text to show better difference of compare methods {nums[i]}", $"a long text to show better difference of compare methods {nums[i + 1]} hghf", StringComparison.Ordinal);
                 Assert.Equal(nums[i].CompareTo(nums[i + 1]), result);
             }
         }
@@ -134,7 +130,7 @@ namespace NaturalStringComparerTest
                 , "number9", "number33", "number5", "number12"
             };
 
-            stringList.Sort(NaturalComparer.Ordinal);
+            stringList.Sort(new NaturalComparer(StringComparison.Ordinal));
             //or
             stringList.NaturalSort(); // need "using Gihan.Helpers.Linq;"
 

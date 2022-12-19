@@ -80,8 +80,8 @@ public class NaturalComparer : IComparer<string?>, IComparer<ReadOnlyMemory<char
 
             if (char.IsDigit(xCh) && char.IsDigit(yCh))
             {
-                x = GetNumber(x.Slice(i), out var xNum);
-                y = GetNumber(y.Slice(i), out var yNum);
+                var xOut = GetNumber(x.Slice(i), out var xNum);
+                var yOut = GetNumber(y.Slice(i), out var yNum);
 
                 if (xNum != yNum)
                 {
@@ -89,8 +89,17 @@ public class NaturalComparer : IComparer<string?>, IComparer<ReadOnlyMemory<char
                 }
 
                 i = -1;
-                length = Math.Min(x.Length, y.Length);
-                continue;
+                length = Math.Min(xOut.Length, yOut.Length);
+                if (length == 0 && xOut.Length == yOut.Length && x.Length != y.Length)
+                {
+                    return y.Length < x.Length ? -1 : 1; // "033" < "33" === true
+                }
+                else
+                {
+                    x = xOut;
+                    y = yOut;
+                    continue;
+                }
             }
 
             if (xCh != yCh)
@@ -110,7 +119,7 @@ public class NaturalComparer : IComparer<string?>, IComparer<ReadOnlyMemory<char
             i++;
         }
 
-#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER
+#if NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER
         number = int.Parse(span[..i]);
         return span[i..];
 #else
