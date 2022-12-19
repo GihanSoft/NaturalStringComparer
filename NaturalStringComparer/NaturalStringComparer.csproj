@@ -19,9 +19,11 @@
     <PackageReleaseNotes>
 3.0.0:
 Using Span to increase speed.
+back to safe zone. using spans
 breaking changes:
   - remove static comparers
   - remove support of .net core 2.1</PackageReleaseNotes>
+    </PackageReleaseNotes>
     <PackageTags>string, comparer, IComparer, NaturalComparer, NaturalStringComparer, Natural-Sort, NaturalSort, String-Comparison, StringComparer, Sorting, Sort, Natural, csharp, c-sharp, C#, </PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
