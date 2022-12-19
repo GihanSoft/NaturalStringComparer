@@ -1,29 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.0;netstandard2.0;net5.0;net6.0</TargetFrameworks>
+    <TargetFrameworks>netstandard1.1;netstandard2.0;netstandard2.1;net461;netcoreapp2.1;net6.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 
-    <Version>2.1.1</Version>
+    <Version>3.0.0</Version>
     <RootNamespace>GihanSoft.String</RootNamespace>
     <Authors>Muhammad Babayi</Authors>
     <Company>GihanSoft</Company>
     <Description>Comparer for strings to sort by number in it (as windows explorer do)</Description>
-    <Copyright>Copyright (c) 2021 Mohammad Babayi</Copyright>
+    <Copyright>Copyright (c) 2022 Mohammad Babayi</Copyright>
     <PackageProjectUrl>https://github.com/GihanSoft/NaturalStringComparer</PackageProjectUrl>
     <RepositoryUrl>https://github.com/GihanSoft/NaturalStringComparer</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageId>GihanSoft.String.NaturalComparer</PackageId>
     <PackageReleaseNotes>
-      2.0.0:
-      use unsafe code for more speed
-      2.1.0:
-      support for .net standard 1.0
-      2.1.1:
-      remove stylecop.json from client code
+      3.0.0:
+      Using Span to increase speed.
     </PackageReleaseNotes>
     <PackageTags>string, comparer, IComparer, NaturalComparer, NaturalStringComparer, Natural-Sort, NaturalSort, String-Comparison, StringComparer, Sorting, Sort, Natural, csharp, c-sharp, C#, </PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -33,6 +28,10 @@
     <PackageIconUrl></PackageIconUrl>
     <PackageIcon>GihanSoft-logo.png</PackageIcon>
   </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.1' or '$(TargetFramework)' == 'netstandard2.0' or '$(TargetFramework)' == 'net461'">
+    <PackageReference Include="System.Memory" Version="4.5.5" />
+  </ItemGroup>
 
   <ItemGroup>
     <Using Remove="System.Net.Http" />
@@ -47,57 +46,6 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <AdditionalFiles Include="stylecop.json" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(Configuration)'=='Debug'">
-    <PackageReference Include="StyleCop.Analyzers" Version="*" PrivateAssets="all">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-
-    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="*">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-
-    <PackageReference Include="Roslynator.CodeAnalysis.Analyzers" Version="*">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-
-    <PackageReference Include="Roslynator.Formatting.Analyzers" Version="*">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="*" PrivateAssets="all">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-
-    <PackageReference Include="Roslynator.Analyzers" Version="*" PrivateAssets="all">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-
-    <PackageReference Include="SecurityCodeScan.VS2019" Version="*" PrivateAssets="all">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-
-    <PackageReference Include="IDisposableAnalyzers" Version="*" PrivateAssets="all">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-
-    <PackageReference Include="AsyncFixer" Version="*" PrivateAssets="all">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitivex</IncludeAssets>
-    </PackageReference>
   </ItemGroup>
 
 </Project>

@@ -30,7 +30,7 @@ public static class NaturalComparerExtensions
     {
         keySelector ??= o => o?.ToString();
         src.Sort((x, y) =>
-            NaturalComparer.Compare(keySelector(x), keySelector(y), stringComparison));
+            NaturalComparer.Compare(keySelector(x).AsSpan(), keySelector(y).AsSpan(), stringComparison));
     }
 
     /// <summary>
@@ -47,7 +47,7 @@ public static class NaturalComparerExtensions
     {
         keySelector ??= o => o?.ToString();
         Array.Sort(src, (x, y) =>
-            NaturalComparer.Compare(keySelector(x), keySelector(y), stringComparison));
+            NaturalComparer.Compare(keySelector(x).AsSpan(), keySelector(y).AsSpan(), stringComparison));
     }
 
     public static IOrderedEnumerable<TSource> NaturalOrderBy<TSource>(
