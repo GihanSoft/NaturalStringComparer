@@ -25,13 +25,13 @@
       - remove support of .net core 2.1</PackageReleaseNotes>
     <PackageTags>string, comparer, IComparer, NaturalComparer, NaturalStringComparer, Natural-Sort, NaturalSort, String-Comparison, StringComparer, Sorting, Sort, Natural, csharp, c-sharp, C#, </PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <AssemblyName>GihanSoft.NaturalStringComparer</AssemblyName>
     <ApplicationIcon></ApplicationIcon>
     <PackageIconUrl></PackageIconUrl>
     <PackageIcon>GihanSoft-logo.png</PackageIcon>
     <Title>GihanSoft Natural String Comparer</Title>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.1' or '$(TargetFramework)' == 'netstandard2.0' or '$(TargetFramework)' == 'net461'">
