@@ -5,7 +5,7 @@
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
 
-    <Version>3.0.1</Version>
+    <Version>3.0.2</Version>
     <RootNamespace>GihanSoft.String</RootNamespace>
     <Authors>Muhammad Babayi</Authors>
     <Company>GihanSoft</Company>
@@ -43,15 +43,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\GihanSoft-logo.png">
+    <None Include="..\..\GihanSoft-logo.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-    <None Include="..\LICENSE">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-    <None Include="..\README.md">
+    <None Include="..\..\README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
