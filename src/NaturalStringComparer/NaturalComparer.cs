@@ -111,7 +111,7 @@ public class NaturalComparer : IComparer<string?>, IComparer<ReadOnlyMemory<char
         return x.Length.CompareTo(y.Length);
     }
 
-    private static ReadOnlySpan<char> GetNumber(ReadOnlySpan<char> span, out int number)
+    private static ReadOnlySpan<char> GetNumber(ReadOnlySpan<char> span, out ulong number)
     {
         var i = 0;
         while (i < span.Length && char.IsDigit(span[i]))
@@ -120,10 +120,10 @@ public class NaturalComparer : IComparer<string?>, IComparer<ReadOnlyMemory<char
         }
 
 #if NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER
-        number = int.Parse(span[..i]);
+        number = ulong.Parse(span[..i]);
         return span[i..];
 #else
-        number = int.Parse(span.Slice(0, i).ToString());
+        number = ulong.Parse(span.Slice(0, i).ToString());
         return span.Slice(i);
 #endif
     }
