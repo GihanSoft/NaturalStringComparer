@@ -2,6 +2,7 @@ namespace NaturalStringComparerTest
 {
     using System;
     using System.Collections.Generic;
+    using System.Numerics;
 
     using GihanSoft.String;
 
@@ -19,6 +20,30 @@ namespace NaturalStringComparerTest
             {
                 nums[i] = rnd.Next();
             }
+        }
+
+        [Fact]
+        public void TestLargeNumber()
+        {
+            var num1 = 19015611190635;
+            var num2 = 13808910990635;
+            var str1 = num1 + "G";
+            var str2 = num2 + "X";
+
+            var result = NaturalComparer.Compare(str1, str2, StringComparison.Ordinal);
+            Assert.Equal(num1.CompareTo(num2), result);
+        }
+
+        [Fact]
+        public void TestTooLargeNumber()
+        {
+            var num1 = BigInteger.Parse("190156111906351901561119063519015611190635");
+            var num2 = BigInteger.Parse("138089109906351380891099063513808910990635");
+            var str1 = num1 + "G";
+            var str2 = num2 + "X";
+
+            var result = NaturalComparer.Compare(str1, str2, StringComparison.Ordinal);
+            Assert.Equal(num1.CompareTo(num2), result);
         }
 
         [Fact]

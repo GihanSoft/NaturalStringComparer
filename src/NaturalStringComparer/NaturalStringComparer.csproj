@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.1;netstandard2.0;netstandard2.1;net461;net6.0;net7.0</TargetFrameworks>
+    <TargetFrameworks>netstandard1.1;netstandard2.0;netstandard2.1;net6.0;net7.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
 
-    <Version>3.0.2</Version>
+    <Version>3.1.0</Version>
     <RootNamespace>GihanSoft.String</RootNamespace>
     <Authors>Muhammad Babayi</Authors>
     <Company>GihanSoft</Company>
@@ -22,7 +22,10 @@
       back to safe zone. using spans
       breaking changes:
       - remove static comparers
-      - remove support of .net core 2.1</PackageReleaseNotes>
+      - remove support of .net core 2.1
+      3.1.0:
+      fix throw if larger than Int32, now support numbers up to infinity, or your ram capacity
+    </PackageReleaseNotes>
     <PackageTags>string, comparer, IComparer, NaturalComparer, NaturalStringComparer, Natural-Sort, NaturalSort, String-Comparison, StringComparer, Sorting, Sort, Natural, csharp, c-sharp, C#, </PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <AssemblyName>GihanSoft.NaturalStringComparer</AssemblyName>
