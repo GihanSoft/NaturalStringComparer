@@ -9,6 +9,7 @@ namespace GihanSoft.String;
 
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 
 /// <summary>
 /// Natural Comparer.
@@ -83,9 +84,10 @@ public class NaturalComparer : IComparer<string?>, IComparer<ReadOnlyMemory<char
                 var xOut = GetNumber(x.Slice(i), out var xNum);
                 var yOut = GetNumber(y.Slice(i), out var yNum);
 
-                if (xNum != yNum)
+                var compareResult = xNum.CompareTo(yNum);
+                if (compareResult != 0)
                 {
-                    return xNum < yNum ? -1 : 1;
+                    return compareResult;
                 }
 
                 i = -1;
@@ -111,7 +113,7 @@ public class NaturalComparer : IComparer<string?>, IComparer<ReadOnlyMemory<char
         return x.Length.CompareTo(y.Length);
     }
 
-    private static ReadOnlySpan<char> GetNumber(ReadOnlySpan<char> span, out ulong number)
+    private static ReadOnlySpan<char> GetNumber(ReadOnlySpan<char> span, out IComparable number)
     {
         var i = 0;
         while (i < span.Length && char.IsDigit(span[i]))
@@ -120,10 +122,28 @@ public class NaturalComparer : IComparer<string?>, IComparer<ReadOnlyMemory<char
         }
 
 #if NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER
-        number = ulong.Parse(span[..i]);
+        var parseInput = span[..i];
+        try
+        {
+            number = ulong.Parse(parseInput);
+        }
+        catch (OverflowException)
+        {
+            number = BigInteger.Parse(parseInput);
+        }
+
         return span[i..];
 #else
-        number = ulong.Parse(span.Slice(0, i).ToString());
+        var parsInput = span.Slice(0, i).ToString();
+        try
+        {
+            number = ulong.Parse(parsInput);
+        }
+        catch (OverflowException)
+        {
+            number = BigInteger.Parse(parsInput);
+        }
+
         return span.Slice(i);
 #endif
     }
