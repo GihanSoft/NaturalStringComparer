@@ -123,28 +123,19 @@ public class NaturalComparer : IComparer<string?>, IComparer<ReadOnlyMemory<char
 
 #if NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER
         var parseInput = span[..i];
-        try
+#else
+        var parseInput = span.Slice(0, i).ToString();
+#endif
+
+        if (ulong.TryParse(parseInput, out var ulongResult))
         {
-            number = ulong.Parse(parseInput);
+            number = ulongResult;
         }
-        catch (OverflowException)
+        else
         {
             number = BigInteger.Parse(parseInput);
         }
 
-        return span[i..];
-#else
-        var parsInput = span.Slice(0, i).ToString();
-        try
-        {
-            number = ulong.Parse(parsInput);
-        }
-        catch (OverflowException)
-        {
-            number = BigInteger.Parse(parsInput);
-        }
-
         return span.Slice(i);
-#endif
     }
 }
