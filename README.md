@@ -24,7 +24,7 @@ as what windows explorer do {"text1", "text2", "text10"} instead of {"text1", "t
 
 ### Features
 * **Pure C#**
-* **Fast** (because of internal unmanaged code).
+* **Fast** (because of internal usage of `Span`).
 * .NET Standard 1.0
 * Cross-Platform
 * Optional use of `StringComparison` `enum` as base.
