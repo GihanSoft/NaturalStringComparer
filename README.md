@@ -3,17 +3,17 @@
 
 ## install
 ```sh
-dotnet add package GihanSoft.String.NaturalComparer --version 3.0.1
+dotnet add package GihanSoft.String.NaturalComparer --version 3.2.0
 ```
 or
 ```pwsh
-Install-Package GihanSoft.String.NaturalComparer -Version 3.0.1
+Install-Package GihanSoft.String.NaturalComparer -Version 3.2.0
 ```
 or
 ```xml
 <!-- add this to .csproj -->
 <ItemGroup>
-    <PackageReference Include="GihanSoft.String.NaturalComparer" Version="3.0.1" />
+    <PackageReference Include="GihanSoft.String.NaturalComparer" Version="3.2.0" />
 </ItemGroup>
 ```
 
