@@ -21,7 +21,7 @@ jobs:
         uses: brandedoutcast/publish-nuget@v2.5.5
         with:
           # Filepath of the project to be packaged, relative to root of repository
-          PROJECT_FILE_PATH: .\NaturalStringComparer\NaturalStringComparer.csproj
+          PROJECT_FILE_PATH: .\src\NaturalStringComparer\NaturalStringComparer.csproj
 
           # Regex pattern to extract version info in a capturing group
           # VERSION_REGEX: ^\s*<Version>(.*)<\/Version>\s*$
