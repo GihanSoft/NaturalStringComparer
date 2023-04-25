@@ -84,6 +84,7 @@ public class NaturalComparer : IComparer<string?>, IComparer<ReadOnlyMemory<char
                 var xOut = GetNumber(x.Slice(i), out var xNum);
                 var yOut = GetNumber(y.Slice(i), out var yNum);
 
+                UnifyNumberTypes(ref xNum, ref yNum);
                 var compareResult = xNum.CompareTo(yNum);
                 if (compareResult != 0)
                 {
@@ -137,5 +138,18 @@ public class NaturalComparer : IComparer<string?>, IComparer<ReadOnlyMemory<char
         }
 
         return span.Slice(i);
+    }
+
+    private static void UnifyNumberTypes(ref IComparable x, ref IComparable y)
+    {
+        if (x is ulong xLong && y is BigInteger)
+        {
+            x = new BigInteger(xLong);
+        }
+
+        if (x is BigInteger && y is ulong yLong)
+        {
+            y = new BigInteger(yLong);
+        }
     }
 }
