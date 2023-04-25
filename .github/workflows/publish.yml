@@ -1,6 +1,4 @@
 name: publish to nuget
-env:
-  TESTPROJPATH: '.\test\NaturalStringComparerTest'
 on:
   push:
     branches:
@@ -17,7 +15,7 @@ jobs:
           dotnet-version: '7.0.x'
       - run: dotnet restore
       - name: test
-        run: dotnet test {{TESTPROJPATH}}
+        run: dotnet test .\test\NaturalStringComparerTest
       - name: publish on version change
         id: publish_nuget
         uses: brandedoutcast/publish-nuget@v2.5.5
