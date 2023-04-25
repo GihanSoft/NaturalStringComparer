@@ -46,7 +46,6 @@ namespace NaturalStringComparerTest
             Assert.Equal(num1.CompareTo(num2), result);
         }
 
-
         [Fact]
         public void TestShortAndTooLargeNumber()
         {
