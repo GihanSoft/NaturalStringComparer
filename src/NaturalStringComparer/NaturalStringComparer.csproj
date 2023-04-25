@@ -5,7 +5,7 @@
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
 
-    <Version>3.2.0</Version>
+    <Version>3.3.0</Version>
     <RootNamespace>GihanSoft.String</RootNamespace>
     <Authors>Muhammad Babayi</Authors>
     <Company>GihanSoft</Company>
@@ -27,6 +27,8 @@
         fix throw if larger than Int32, now support numbers up to infinity, or your ram capacity
       3.2.0:
         optimize
+      3.3.0:
+        fix bug of big and noramal number
     </PackageReleaseNotes>
     <PackageTags>string, comparer, IComparer, NaturalComparer, NaturalStringComparer, Natural-Sort, NaturalSort, String-Comparison, StringComparer, Sorting, Sort, Natural, csharp, c-sharp, C#, </PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>

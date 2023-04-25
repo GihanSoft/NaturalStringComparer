@@ -47,6 +47,18 @@ namespace NaturalStringComparerTest
         }
 
         [Fact]
+        public void TestShortAndTooLargeNumber()
+        {
+            var num1 = BigInteger.Parse("190156111906351901561119063519015611190635");
+            var num2 = 138;
+            var str1 = num1 + "G";
+            var str2 = num2 + "X";
+
+            var result = NaturalComparer.Compare(str1, str2, StringComparison.Ordinal);
+            Assert.Equal(num1.CompareTo(num2), result);
+        }
+
+        [Fact]
         public void Test00()
         {
             var num1 = rnd.Next();
