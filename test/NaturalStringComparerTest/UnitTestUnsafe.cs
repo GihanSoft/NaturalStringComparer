@@ -14,6 +14,8 @@ namespace NaturalStringComparerTest
         private const int n = 1000000;
         private readonly int[] nums = new int[n];
 
+        private readonly NaturalComparer _sut_Ordinal = new(StringComparison.Ordinal);
+
         public UnitTestUnsafe()
         {
             for (var i = 0; i < nums.Length; i++)
@@ -212,6 +214,25 @@ namespace NaturalStringComparerTest
             number5
             number9
             */
+        }
+
+        public static TheoryData<string, string, int> StringCompareTestData { get; } = new()
+        {
+            { null, null, 0 },
+            { null, "z", -1 },
+            { "a", null, 1 },
+            { "val1", "val2", -1 },
+            { "val2", "val2", 0 },
+            { $"val{ulong.MaxValue}", $"val{ulong.MaxValue}", 0 },
+            { $"val{new BigInteger(ulong.MaxValue) + 1}", $"val{new BigInteger(ulong.MaxValue) + 1}", 0 },
+        };
+
+        [Theory]
+        [MemberData(nameof(StringCompareTestData))]
+        public void StringCompareTest(string input1, string input2, int expected)
+        {
+            var actual = _sut_Ordinal.Compare(input1, input2);
+            Assert.Equal(expected, actual);
         }
     }
 }

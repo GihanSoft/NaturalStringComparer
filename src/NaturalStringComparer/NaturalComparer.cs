@@ -14,7 +14,7 @@ using System.Numerics;
 /// <summary>
 /// Natural Comparer.
 /// </summary>
-public class NaturalComparer : IComparer<string?>, IComparer<ReadOnlyMemory<char>>
+public sealed class NaturalComparer : IComparer<string?>, IComparer<ReadOnlyMemory<char>>
 {
     private readonly StringComparison stringComparison;
 
@@ -81,11 +81,34 @@ public class NaturalComparer : IComparer<string?>, IComparer<ReadOnlyMemory<char
 
             if (char.IsDigit(xCh) && char.IsDigit(yCh))
             {
-                var xOut = GetNumber(x.Slice(i), out var xNum);
-                var yOut = GetNumber(y.Slice(i), out var yNum);
+                var xOut = GetNumber(x.Slice(i), out var xNumAsSpan);
+                var yOut = GetNumber(y.Slice(i), out var yNumAsSpan);
 
-                UnifyNumberTypes(ref xNum, ref yNum);
-                var compareResult = xNum.CompareTo(yNum);
+                int compareResult;
+
+                if (IsUlong(xNumAsSpan) && IsUlong(yNumAsSpan))
+                {
+#if NETSTANDARD2_1_OR_GREATER || NET8_0_OR_GREATER
+                    var xNum = ulong.Parse(xNumAsSpan);
+                    var yNum = ulong.Parse(yNumAsSpan);
+#else
+                    var xNum = ulong.Parse(xNumAsSpan.ToString());
+                    var yNum = ulong.Parse(yNumAsSpan.ToString());
+#endif
+                    compareResult = xNum.CompareTo(yNum);
+                }
+                else
+                {
+#if NETSTANDARD2_1_OR_GREATER || NET8_0_OR_GREATER
+                    var xNum = BigInteger.Parse(xNumAsSpan);
+                    var yNum = BigInteger.Parse(yNumAsSpan);
+#else
+                    var xNum = BigInteger.Parse(xNumAsSpan.ToString());
+                    var yNum = BigInteger.Parse(yNumAsSpan.ToString());
+#endif
+                    compareResult = xNum.CompareTo(yNum);
+                }
+
                 if (compareResult != 0)
                 {
                     return compareResult;
@@ -97,12 +120,10 @@ public class NaturalComparer : IComparer<string?>, IComparer<ReadOnlyMemory<char
                 {
                     return y.Length < x.Length ? -1 : 1; // "033" < "33" === true
                 }
-                else
-                {
-                    x = xOut;
-                    y = yOut;
-                    continue;
-                }
+
+                x = xOut;
+                y = yOut;
+                continue;
             }
 
             if (xCh != yCh)
@@ -114,7 +135,39 @@ public class NaturalComparer : IComparer<string?>, IComparer<ReadOnlyMemory<char
         return x.Length.CompareTo(y.Length);
     }
 
-    private static ReadOnlySpan<char> GetNumber(ReadOnlySpan<char> span, out IComparable number)
+    private static bool IsUlong(ReadOnlySpan<char> number)
+    {
+        while (number.Length > 0 && number[0] == '0')
+        {
+            number = number.Slice(1);
+        }
+
+        // 18446744073709551615
+        return number switch {
+            { Length: <= 19 } => true,
+            { Length: > 20 } => false,
+            ['1', < '8', ..] => true,
+            ['1', '8', < '4', ..] => true,
+            ['1', '8', '4', < '4', ..] => true,
+            ['1', '8', '4', '4', < '6', ..] => true,
+            ['1', '8', '4', '4', '6', < '7', ..] => true,
+            ['1', '8', '4', '4', '6', '7', < '4', ..] => true,
+            ['1', '8', '4', '4', '6', '7', '4', < '4', ..] => true,
+            ['1', '8', '4', '4', '6', '7', '4', '4', '0', < '7', ..] => true,
+            ['1', '8', '4', '4', '6', '7', '4', '4', '0', '7', < '3', ..] => true,
+            ['1', '8', '4', '4', '6', '7', '4', '4', '0', '7', '3', < '7', ..] => true,
+            ['1', '8', '4', '4', '6', '7', '4', '4', '0', '7', '3', '7', '0', < '9', ..] => true,
+            ['1', '8', '4', '4', '6', '7', '4', '4', '0', '7', '3', '7', '0', '9', < '5', ..] => true,
+            ['1', '8', '4', '4', '6', '7', '4', '4', '0', '7', '3', '7', '0', '9', '5', < '5', ..] => true,
+            ['1', '8', '4', '4', '6', '7', '4', '4', '0', '7', '3', '7', '0', '9', '5', '5', '0', ..] => true,
+            ['1', '8', '4', '4', '6', '7', '4', '4', '0', '7', '3', '7', '0', '9', '5', '5', '1', < '6', ..] => true,
+            ['1', '8', '4', '4', '6', '7', '4', '4', '0', '7', '3', '7', '0', '9', '5', '5', '1', '6', '0', ..] => true,
+            ['1', '8', '4', '4', '6', '7', '4', '4', '0', '7', '3', '7', '0', '9', '5', '5', '1', '6', '1', <= '5'] => true,
+            _ => false
+        };
+    }
+
+    private static ReadOnlySpan<char> GetNumber(ReadOnlySpan<char> span, out ReadOnlySpan<char> number)
     {
         var i = 0;
         while (i < span.Length && char.IsDigit(span[i]))
@@ -122,34 +175,7 @@ public class NaturalComparer : IComparer<string?>, IComparer<ReadOnlyMemory<char
             i++;
         }
 
-#if NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER
-        var parseInput = span[..i];
-#else
-        var parseInput = span.Slice(0, i).ToString();
-#endif
-
-        if (ulong.TryParse(parseInput, out var ulongResult))
-        {
-            number = ulongResult;
-        }
-        else
-        {
-            number = BigInteger.Parse(parseInput);
-        }
-
+        number = span.Slice(0, i);
         return span.Slice(i);
-    }
-
-    private static void UnifyNumberTypes(ref IComparable x, ref IComparable y)
-    {
-        if (x is ulong xLong && y is BigInteger)
-        {
-            x = new BigInteger(xLong);
-        }
-
-        if (x is BigInteger && y is ulong yLong)
-        {
-            y = new BigInteger(yLong);
-        }
     }
 }
