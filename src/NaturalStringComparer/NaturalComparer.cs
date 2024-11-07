@@ -9,7 +9,6 @@ namespace GihanSoft.String;
 
 using System;
 using System.Collections.Generic;
-using System.Numerics;
 
 /// <summary>
 /// Natural Comparer.
@@ -84,30 +83,7 @@ public sealed class NaturalComparer : IComparer<string?>, IComparer<ReadOnlyMemo
                 var xOut = GetNumber(x.Slice(i), out var xNumAsSpan);
                 var yOut = GetNumber(y.Slice(i), out var yNumAsSpan);
 
-                int compareResult;
-
-                if (IsUlong(xNumAsSpan) && IsUlong(yNumAsSpan))
-                {
-#if NETSTANDARD2_1_OR_GREATER || NET8_0_OR_GREATER
-                    var xNum = ulong.Parse(xNumAsSpan);
-                    var yNum = ulong.Parse(yNumAsSpan);
-#else
-                    var xNum = ulong.Parse(xNumAsSpan.ToString());
-                    var yNum = ulong.Parse(yNumAsSpan.ToString());
-#endif
-                    compareResult = xNum.CompareTo(yNum);
-                }
-                else
-                {
-#if NETSTANDARD2_1_OR_GREATER || NET8_0_OR_GREATER
-                    var xNum = BigInteger.Parse(xNumAsSpan);
-                    var yNum = BigInteger.Parse(yNumAsSpan);
-#else
-                    var xNum = BigInteger.Parse(xNumAsSpan.ToString());
-                    var yNum = BigInteger.Parse(yNumAsSpan.ToString());
-#endif
-                    compareResult = xNum.CompareTo(yNum);
-                }
+                var compareResult = CompareNumValues(xNumAsSpan, yNumAsSpan);
 
                 if (compareResult != 0)
                 {
@@ -116,10 +92,6 @@ public sealed class NaturalComparer : IComparer<string?>, IComparer<ReadOnlyMemo
 
                 i = -1;
                 length = Math.Min(xOut.Length, yOut.Length);
-                if (length == 0 && xOut.Length == yOut.Length && x.Length != y.Length)
-                {
-                    return y.Length < x.Length ? -1 : 1; // "033" < "33" === true
-                }
 
                 x = xOut;
                 y = yOut;
@@ -135,38 +107,6 @@ public sealed class NaturalComparer : IComparer<string?>, IComparer<ReadOnlyMemo
         return x.Length.CompareTo(y.Length);
     }
 
-    private static bool IsUlong(ReadOnlySpan<char> number)
-    {
-        while (number.Length > 0 && number[0] == '0')
-        {
-            number = number.Slice(1);
-        }
-
-        // 18446744073709551615
-        return number switch {
-            { Length: <= 19 } => true,
-            { Length: > 20 } => false,
-            ['1', < '8', ..] => true,
-            ['1', '8', < '4', ..] => true,
-            ['1', '8', '4', < '4', ..] => true,
-            ['1', '8', '4', '4', < '6', ..] => true,
-            ['1', '8', '4', '4', '6', < '7', ..] => true,
-            ['1', '8', '4', '4', '6', '7', < '4', ..] => true,
-            ['1', '8', '4', '4', '6', '7', '4', < '4', ..] => true,
-            ['1', '8', '4', '4', '6', '7', '4', '4', '0', < '7', ..] => true,
-            ['1', '8', '4', '4', '6', '7', '4', '4', '0', '7', < '3', ..] => true,
-            ['1', '8', '4', '4', '6', '7', '4', '4', '0', '7', '3', < '7', ..] => true,
-            ['1', '8', '4', '4', '6', '7', '4', '4', '0', '7', '3', '7', '0', < '9', ..] => true,
-            ['1', '8', '4', '4', '6', '7', '4', '4', '0', '7', '3', '7', '0', '9', < '5', ..] => true,
-            ['1', '8', '4', '4', '6', '7', '4', '4', '0', '7', '3', '7', '0', '9', '5', < '5', ..] => true,
-            ['1', '8', '4', '4', '6', '7', '4', '4', '0', '7', '3', '7', '0', '9', '5', '5', '0', ..] => true,
-            ['1', '8', '4', '4', '6', '7', '4', '4', '0', '7', '3', '7', '0', '9', '5', '5', '1', < '6', ..] => true,
-            ['1', '8', '4', '4', '6', '7', '4', '4', '0', '7', '3', '7', '0', '9', '5', '5', '1', '6', '0', ..] => true,
-            ['1', '8', '4', '4', '6', '7', '4', '4', '0', '7', '3', '7', '0', '9', '5', '5', '1', '6', '1', <= '5'] => true,
-            _ => false
-        };
-    }
-
     private static ReadOnlySpan<char> GetNumber(ReadOnlySpan<char> span, out ReadOnlySpan<char> number)
     {
         var i = 0;
@@ -177,5 +117,45 @@ public sealed class NaturalComparer : IComparer<string?>, IComparer<ReadOnlyMemo
 
         number = span.Slice(0, i);
         return span.Slice(i);
+    }
+    
+    private static int CompareNumValues(ReadOnlySpan<char> numValue1, ReadOnlySpan<char> numValue2)
+    {
+        var num1AsSpan = TrimZero(numValue1);
+        var num2AsSpan = TrimZero(numValue2);
+
+        if (num1AsSpan.Length < num2AsSpan.Length)
+        {
+            return -1;
+        }
+
+        if (num1AsSpan.Length > num2AsSpan.Length)
+        {
+            return 1;
+        }
+
+        var compareResult = num1AsSpan.CompareTo(num2AsSpan, StringComparison.Ordinal);
+        
+        if (compareResult != 0)
+        {
+            return Math.Sign(compareResult);
+        }
+
+        if (numValue2.Length == numValue1.Length)
+        {
+            return compareResult;
+        }
+
+        return numValue2.Length < numValue1.Length ? -1 : 1; // "033" < "33" === true
+    }
+
+    private static ReadOnlySpan<char> TrimZero(ReadOnlySpan<char> numValue)
+    {
+        while (numValue.Length > 0 && numValue[0] == '0')
+        {
+            numValue = numValue.Slice(1);
+        }
+
+        return numValue;
     }
 }
