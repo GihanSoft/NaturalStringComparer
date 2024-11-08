@@ -119,8 +119,8 @@ public sealed class NaturalComparer : IComparer<string?>, IComparer<ReadOnlyMemo
 
     private static int CompareNumValues(ReadOnlySpan<char> numValue1, ReadOnlySpan<char> numValue2)
     {
-        var num1AsSpan = TrimZero(numValue1);
-        var num2AsSpan = TrimZero(numValue2);
+        var num1AsSpan = numValue1.TrimStart('0');
+        var num2AsSpan = numValue2.TrimStart('0');
 
         if (num1AsSpan.Length < num2AsSpan.Length)
         {
@@ -145,15 +145,5 @@ public sealed class NaturalComparer : IComparer<string?>, IComparer<ReadOnlyMemo
         }
 
         return numValue2.Length < numValue1.Length ? -1 : 1; // "033" < "33" === true
-    }
-
-    private static ReadOnlySpan<char> TrimZero(ReadOnlySpan<char> numValue)
-    {
-        while (numValue.Length > 0 && numValue[0] == '0')
-        {
-            numValue = numValue.Slice(1);
-        }
-
-        return numValue;
     }
 }
