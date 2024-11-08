@@ -75,10 +75,7 @@ public sealed class NaturalComparer : IComparer<string?>, IComparer<ReadOnlyMemo
 
         for (var i = 0; i < length; i++)
         {
-            var xCh = x[i];
-            var yCh = y[i];
-
-            if (char.IsDigit(xCh) && char.IsDigit(yCh))
+            if (char.IsDigit(x[i]) && char.IsDigit(y[i]))
             {
                 var xOut = GetNumber(x.Slice(i), out var xNumAsSpan);
                 var yOut = GetNumber(y.Slice(i), out var yNumAsSpan);
@@ -98,9 +95,10 @@ public sealed class NaturalComparer : IComparer<string?>, IComparer<ReadOnlyMemo
                 continue;
             }
 
-            if (xCh != yCh)
+            var charCompareResult = x.Slice(i, 1).CompareTo(y.Slice(i, 1), stringComparison);
+            if (charCompareResult != 0)
             {
-                return x.Slice(i, 1).CompareTo(y.Slice(i, 1), stringComparison);
+                return charCompareResult;
             }
         }
 

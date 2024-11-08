@@ -4,6 +4,8 @@ namespace NaturalStringComparerTest
     using System.Collections.Generic;
     using System.Numerics;
 
+    using FluentAssertions;
+
     using GihanSoft.String;
 
     using Xunit;
@@ -22,6 +24,28 @@ namespace NaturalStringComparerTest
             {
                 nums[i] = rnd.Next();
             }
+        }
+
+        [InlineData("abc", "ABC")]
+        [InlineData("abc", "aBc")]
+        [InlineData("XX11xx", "xx11XX")]
+        [InlineData("11xx22", "11XX22")]
+        [Theory]
+        public void Given_OrdinalIgnoreCase_When_strings_only_different_in_case_Then_return_0(string x, string y)
+        {
+            var actual = NaturalComparer.Compare(x, y, StringComparison.OrdinalIgnoreCase);
+            actual.Should().Be(0);
+        }
+
+        [Fact]
+        public void Given_OrdinalIgnoreCase_When_there_is_a_different_char_after_a_case_different_char_Then_should_check_rest_of_span()
+        {
+            var x = "ax";
+            var y = "Ay";
+            var expected = StringComparer.OrdinalIgnoreCase.Compare("x", "y");
+
+            var actual = NaturalComparer.Compare(x, y, StringComparison.OrdinalIgnoreCase);
+            actual.Should().Be(expected);
         }
 
         [Fact]
