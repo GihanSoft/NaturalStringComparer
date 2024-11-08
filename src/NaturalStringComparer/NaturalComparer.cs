@@ -118,7 +118,7 @@ public sealed class NaturalComparer : IComparer<string?>, IComparer<ReadOnlyMemo
         number = span.Slice(0, i);
         return span.Slice(i);
     }
-    
+
     private static int CompareNumValues(ReadOnlySpan<char> numValue1, ReadOnlySpan<char> numValue2)
     {
         var num1AsSpan = TrimZero(numValue1);
@@ -135,7 +135,7 @@ public sealed class NaturalComparer : IComparer<string?>, IComparer<ReadOnlyMemo
         }
 
         var compareResult = num1AsSpan.CompareTo(num2AsSpan, StringComparison.Ordinal);
-        
+
         if (compareResult != 0)
         {
             return Math.Sign(compareResult);
